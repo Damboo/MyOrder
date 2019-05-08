@@ -31,7 +31,7 @@ public class OrderController implements PreOrderAPI {
             return Result.fail(errorMsg);
         }
         Result result = Result.success();
-        result.setData(resultMap.get("bllNo"));
+        result.setData(resultMap.get("billNo"));
         return result;
     }
 
