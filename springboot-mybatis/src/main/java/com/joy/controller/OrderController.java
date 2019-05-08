@@ -1,83 +1,52 @@
 package com.joy.controller;
 
 import java.util.List;
+import java.util.Map;
 
-import com.joy.pojo.JsonResult;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
+import com.joy.api.PreOrderAPI;
+import com.joy.core.Result;
+import com.joy.core.SafeKit;
+import com.joy.dto.PreOrderAddDTO;
+import com.joy.exception.ServiceException;
+import com.joy.service.PreOrderService;
+import com.joy.vo.OrderInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.joy.pojo.PreOrder;
-import com.joy.service.OrderService;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/propertyfee")
-@Api(description = "订单管理")
-public class OrderController {
+public class OrderController implements PreOrderAPI {
 
-	@Autowired
-	private OrderService orderService;
+    @Autowired
+    private PreOrderService preOrderService;
 
-    /**
-     * 添加用户
-     * @param user
-     * @return
-     */
-    @ApiOperation(value="生成预缴订单", notes="生成预缴订单接口")
-    @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "Order")
-    @RequestMapping(value = "user", method = RequestMethod.POST)
-    public ResponseEntity<JsonResult> add (@RequestBody PreOrder user){
-        JsonResult r = new JsonResult();
-        try {
-            users.put(user.getId(), user);
-            r.setResult(user.getId());
-            r.setResultCode(200);
-            r.setMsg("成功");
-        } catch (Exception e) {
-            r.setResult(e.getClass().getName() + ":" + e.getMessage());
-            r.setStatus("error");
-            e.printStackTrace();
+    @Override
+    @PostMapping(value = "createPreOrder")
+    public Result<Map<String, Object>> createPreOrder(@RequestBody PreOrderAddDTO preOrderAddDTO) {
+        Map<String, Object> resultMap = preOrderService.createPreOrder(preOrderAddDTO);
+        if (!SafeKit.getBoolean(resultMap.get("isSuccess"))) {
+            Result result = Result.fail(SafeKit.getString(resultMap.get("errorMsg")));
+        } else {
+
         }
-        return ResponseEntity.ok(r);
+        return Result.success();
     }
 
-
-    @RequestMapping("/userlist")
-	public List<PreOrder> queryList(){
-		return orderService.queryList();
-	}
-
-    @RequestMapping("/queryUser")
-    public PreOrder queryUserEntity(long userId){
-        PreOrder preOrder = orderService.findById(userId);
-        return preOrder;
-    }
-
-
-
-    @RequestMapping("/insertParam")
-    public int insertParam() {
-        return orderService.insertParam();
-    }
-
-    @RequestMapping("/insertByMap")
-    public int insertByMap() {
-        return orderService.insertByMap();
-    }
-
-    @RequestMapping("/updateEntity")
-    public int updateEntity() {
-        return orderService.updateEntity();
-    }
-
-    @RequestMapping("/deleteEntity")
-    public int deleteEntity() {
-        return orderService.deleteEntity();
+    @Override
+    @GetMapping(value = "preOrderList")
+    public Result<List<OrderInfoVO>> preOrderList(String userCode, String orderStatus, String orderTime) {
+        if (SafeKit.isEmpty(userCode)) {
+            throw new ServiceException("业主代码不能为空");
+        }
+        if (SafeKit.isEmpty(orderStatus)) {
+            throw new ServiceException("状态不能为空");
+        }
+        if (SafeKit.isEmpty(orderTime)) {
+            throw new ServiceException("订单时间不能为空");
+        }
+        List<OrderInfoVO> orderInfoVOList = preOrderService.getPreOrderList(userCode, orderStatus, orderTime);
+        Result<List<OrderInfoVO>> result = Result.success();
+        result.setData(null);
+        return result;
     }
 }
