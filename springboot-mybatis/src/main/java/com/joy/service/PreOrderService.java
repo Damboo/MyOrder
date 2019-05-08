@@ -31,10 +31,10 @@ public class PreOrderService {
     public Map<String, Object> createPreOrder(PreOrderAddDTO preOrderAddDTO) {
         Map<String, Object> map = new HashMap<>();
         //    首先校验出是否存在未支付的订单,如果存在则不生成(status未支付,delFlag为0)
-        String existMsg = preOrderDao.checkOrderExist(preOrderAddDTO.getUserCode(), preOrderAddDTO.getRoomCode());
-        if (!SafeKit.isEmpty(existMsg)) {
+        List<PreOrder> orderList = preOrderDao.getUserOrder(preOrderAddDTO.getUserCode(), preOrderAddDTO.getRoomCode());
+        if (!orderList.isEmpty()) {
             map.put("isSuccess", false);
-            map.put("errorMsg", existMsg);
+            map.put("errorMsg", "当前仍存在未支付的订单");
             return map;
         }
         //取出dto内的账单详情
@@ -55,10 +55,10 @@ public class PreOrderService {
         //生成一个订单号
         String billNo = DateUtil.getNowTime() + DateUtil.getRandomNum(3) + "A1";
         //对未支付订单进行二次校验
-        String existMsg2 = preOrderDao.checkOrderExist(preOrderAddDTO.getUserCode(), preOrderAddDTO.getRoomCode());
-        if (!SafeKit.isEmpty(existMsg2)) {
+        List<PreOrder> orderList2 = preOrderDao.getUserOrder(preOrderAddDTO.getUserCode(), preOrderAddDTO.getRoomCode());
+        if (!orderList2.isEmpty()) {
             map.put("isSuccess", false);
-            map.put("errorMsg", existMsg);
+            map.put("errorMsg", "当前仍存在未支付的订单");
             return map;
         }
         Date date = new Date();
