@@ -27,4 +27,13 @@ public class DateUtil {
         // 返回固定的长度的随机数
         return fixLengthString.substring(1, strLength + 1);
     }
+
+    /**
+     * 获取指定月份前的String日期类型
+     */
+    public static String getPreDateStr(int month) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime localDateTime = LocalDateTime.now();
+        return localDateTime.minusMonths(month).format(formatter);
+    }
 }

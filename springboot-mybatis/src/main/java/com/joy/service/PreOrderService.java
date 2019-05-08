@@ -92,9 +92,16 @@ public class PreOrderService {
     /**
      * 查询预缴费订单列表
      */
-    public List<OrderInfoVO> getPreOrderList(String userCode, String orderStatus, String orderTime){
-        return null;
+    public List<OrderInfoVO> getPreOrderList(String userCode, Integer orderStatus, Integer orderTime) {
+        String preDate = "";
+        if (null != orderTime) {
+            preDate = DateUtil.getPreDateStr(orderTime);
+        }
+        //获取指定时间前的日期
+        if (null == orderStatus) {
+            return null != orderTime ? preOrderDao.getPreOrderList(userCode, preDate) : preOrderDao.getPreOrderList(userCode);
+        } else {
+            return null != orderTime ? preOrderDao.getPreOrderList(userCode, orderStatus, preDate) : preOrderDao.getPreOrderList(userCode, orderStatus);
+        }
     }
-
-
 }

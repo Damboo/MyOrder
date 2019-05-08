@@ -13,6 +13,8 @@ import com.joy.vo.OrderInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/propertyfee")
 public class OrderController implements PreOrderAPI {
@@ -22,31 +24,26 @@ public class OrderController implements PreOrderAPI {
 
     @Override
     @PostMapping(value = "createPreOrder")
-    public Result<Map<String, Object>> createPreOrder(@RequestBody PreOrderAddDTO preOrderAddDTO) {
+    public Result createPreOrder(@Valid @RequestBody PreOrderAddDTO preOrderAddDTO) {
         Map<String, Object> resultMap = preOrderService.createPreOrder(preOrderAddDTO);
         if (!SafeKit.getBoolean(resultMap.get("isSuccess"))) {
-            Result result = Result.fail(SafeKit.getString(resultMap.get("errorMsg")));
-        } else {
-
+            String errorMsg = SafeKit.getString(resultMap.get("errorMsg"));
+            return Result.fail(errorMsg);
         }
-        return Result.success();
+        Result result = Result.success();
+        result.setData(resultMap.get("bllNo"));
+        return result;
     }
 
     @Override
     @GetMapping(value = "preOrderList")
-    public Result<List<OrderInfoVO>> preOrderList(String userCode, String orderStatus, String orderTime) {
+    public Result<List<OrderInfoVO>> preOrderList(String userCode, Integer orderStatus, Integer orderTime) {
         if (SafeKit.isEmpty(userCode)) {
             throw new ServiceException("业主代码不能为空");
         }
-        if (SafeKit.isEmpty(orderStatus)) {
-            throw new ServiceException("状态不能为空");
-        }
-        if (SafeKit.isEmpty(orderTime)) {
-            throw new ServiceException("订单时间不能为空");
-        }
         List<OrderInfoVO> orderInfoVOList = preOrderService.getPreOrderList(userCode, orderStatus, orderTime);
         Result<List<OrderInfoVO>> result = Result.success();
-        result.setData(null);
+        result.setData(orderInfoVOList);
         return result;
     }
 }
