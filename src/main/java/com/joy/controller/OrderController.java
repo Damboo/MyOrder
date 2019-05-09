@@ -2,6 +2,7 @@ package com.joy.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import com.joy.api.PreOrderAPI;
 import com.joy.constant.OrderConstant;
@@ -31,7 +32,7 @@ public class OrderController implements PreOrderAPI {
     public Result createPreOrder(@Valid @RequestBody PreOrderAddDTO preOrderAddDTO, BindingResult bindingResult) {
         //若有为空的参数
         if (bindingResult.hasErrors()) {
-            return Result.fail(bindingResult.getFieldError().getDefaultMessage());
+            return Result.fail(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
         }
         Map<String, Object> resultMap = preOrderService.createPreOrder(preOrderAddDTO);
         if (resultMap != null && !resultMap.isEmpty()) {

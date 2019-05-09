@@ -90,33 +90,4 @@ public class Result<T> implements Serializable {
         this.data = null;
         return this;
     }
-
-    public Object get(String key) {
-        if (this.data != null && !SafeKit.isEmpty(key) && this.data instanceof Map) {
-            Map<String, Object> map = (Map)this.data;
-            return map.get(key);
-        } else {
-            return null;
-        }
-    }
-
-    public String getString(String key) {
-        return SafeKit.getString(this.get(key));
-    }
-
-    public Integer getInteger(String key) {
-        return SafeKit.getInteger(this.get(key));
-    }
-
-    public Long getLong(String key) {
-        return SafeKit.getLong(this.get(key));
-    }
-
-    public Double getDouble(String key) {
-        return SafeKit.getDouble(this.get(key));
-    }
-
-    public Boolean getBoolean(String key) {
-        return SafeKit.getBoolean(this.get(key));
-    }
 }
