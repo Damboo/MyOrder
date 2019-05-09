@@ -19,13 +19,13 @@ public interface PreOrderDao {
     @Select("SELECT * FROM property_pre_payment WHERE delFlag=0 and statusCode=0 and (userCode = #{userCode} or roomCode = #{roomCode})")
     List<PreOrder> getUserOrder(String userCode, String roomCode);
 
-    @Select("SELECT * FROM property_pre_payment WHERE delFlag=0 and userCode = #{userCode} and statusCode = #{statusCode} and billDate > #{orderTime}")
+    @Select("SELECT * FROM property_pre_payment WHERE delFlag=0 and userCode = #{userCode} and statusCode = #{statusCode} and billDate > #{orderTime} order by createdTime desc ")
     List<OrderInfoVO> getPreOrderList1(String userCode, Integer statusCode, String orderTime);
 
-    @Select("SELECT * FROM property_pre_payment WHERE delFlag=0 and userCode = #{userCode} and statusCode = #{statusCode}")
+    @Select("SELECT * FROM property_pre_payment WHERE delFlag=0 and userCode = #{userCode} and statusCode = #{statusCode} order by createdTime desc ")
     List<OrderInfoVO> getPreOrderList2(String userCode, Integer statusCode);
 
-    @Select("SELECT * FROM property_pre_payment WHERE delFlag=0 and userCode = #{userCode} and billDate > #{orderTime}")
+    @Select("SELECT * FROM property_pre_payment WHERE delFlag=0 and userCode = #{userCode} and billDate > #{orderTime} order by createdTime desc ")
     List<OrderInfoVO> getPreOrderList3(String userCode, String orderTime);
 
     @Select("SELECT * FROM property_pre_payment WHERE delFlag=0 and userCode = #{userCode}")
