@@ -25,7 +25,7 @@ public class OrderController implements PreOrderAPI {
 
     @Autowired
     private PreOrderService preOrderService;
-    private Result result;
+    private Result result = Result.success();
 
     @Override
     @PostMapping(value = "createPreOrder")
@@ -64,7 +64,6 @@ public class OrderController implements PreOrderAPI {
             }
         }
         List<OrderInfoVO> orderInfoVOList = preOrderService.getPreOrderList(userCode, orderStatus, orderTime);
-        result = Result.success();
         result.setData(orderInfoVOList);
         return result;
     }
