@@ -1,10 +1,10 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="HisenseOrderFramework:war exploded">
-    <output-path>$PROJECT_DIR$/target/com.joy-0.0.1-SNAPSHOT</output-path>
+    <output-path>$PROJECT_DIR$/target/HisenseOrderFramework-0.0.1-SNAPSHOT</output-path>
     <properties id="maven-jee-properties">
       <options>
         <exploded>true</exploded>
-        <module>com.joy</module>
+        <module>HisenseOrderFramework</module>
         <packaging>war</packaging>
       </options>
     </properties>
@@ -87,7 +87,7 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/com.joy-0.0.1-SNAPSHOT/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/target/HisenseOrderFramework-0.0.1-SNAPSHOT/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="HisenseOrderFramework/web/Web" />
     </root>
