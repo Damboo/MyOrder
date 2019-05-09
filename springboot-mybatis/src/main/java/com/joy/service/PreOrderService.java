@@ -1,9 +1,12 @@
 package com.joy.service;
 
 import com.joy.constant.OrderConstant;
+import com.joy.core.BeanMapper;
 import com.joy.core.SafeKit;
+import com.joy.dao.BillInfoDao;
 import com.joy.dao.PreOrderDao;
 import com.joy.dto.PreOrderAddDTO;
+import com.joy.pojo.BillInfo;
 import com.joy.pojo.PreOrder;
 import com.joy.util.DateUtil;
 import com.joy.vo.BillInfoVO;
@@ -21,6 +24,8 @@ public class PreOrderService {
 
     @Autowired
     private PreOrderDao preOrderDao;
+    @Autowired
+    private BillInfoDao billInfoDao;
 
     /**
      * 对接收到的dto,进行存库
@@ -63,26 +68,24 @@ public class PreOrderService {
         }
         Date date = new Date();
         //保存订单信息
-        PreOrder preOrder = new PreOrder();
+        PreOrder preOrder = BeanMapper.map(preOrderAddDTO, PreOrder.class);
         preOrder.setBillNo(billNo);
         preOrder.setBillDate(date);
-        preOrder.setUserCode(preOrderAddDTO.getUserCode());
-        preOrder.setRoomCode(preOrderAddDTO.getRoomCode());
-        preOrder.setBeginDate(preOrderAddDTO.getBeginDate());
-        preOrder.setEndDate(preOrderAddDTO.getEndDate());
-        preOrder.setTotalMoney(preOrderAddDTO.getTotalMoney());
-        preOrder.setCreatedTime(date);
-        preOrder.setDelFlag(0);
+        //默认预缴费
+        preOrder.setBillType(OrderConstant.PREPAID);
         //默认待支付
         preOrder.setStatusCode(OrderConstant.TOBEPAID_CODE);
         preOrder.setStatusName(OrderConstant.TOBEPAID_NAME);
-        //默认预缴费
-        preOrder.setBillType(OrderConstant.PREPAID);
-        preOrder.setServerTime(date);
         preOrder.setUnionPayMoney(preOrderAddDTO.getTotalMoney());
+        preOrder.setCreatedTime(date);
+        preOrder.setServerTime(date);
+        preOrder.setDelFlag(0);
+        preOrderDao.save(preOrder);
         //保存账单信息
         for (BillInfoVO billInfoVO : list) {
             //自动装配然后循环保存
+            BillInfo billInfo = BeanMapper.map(billInfoVO, BillInfo.class);
+            billInfoDao.save(billInfo);
         }
         map.put("isSuccess", true);
         map.put("billNo", billNo);
@@ -92,9 +95,16 @@ public class PreOrderService {
     /**
      * 查询预缴费订单列表
      */
-    public List<OrderInfoVO> getPreOrderList(String userCode, String orderStatus, String orderTime){
-        return null;
+    public List<OrderInfoVO> getPreOrderList(String userCode, Integer orderStatus, Integer orderTime) {
+        String preDate = "";
+        if (null != orderTime) {
+            preDate = DateUtil.getPreDateStr(orderTime);
+        }
+        //获取指定时间前的日期
+        if (null == orderStatus) {
+            return null != orderTime ? preOrderDao.getPreOrderList(userCode, preDate) : preOrderDao.getPreOrderList(userCode);
+        } else {
+            return null != orderTime ? preOrderDao.getPreOrderList(userCode, orderStatus, preDate) : preOrderDao.getPreOrderList(userCode, orderStatus);
+        }
     }
-
-
 }

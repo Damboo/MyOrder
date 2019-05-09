@@ -6,9 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="com.joy" />
         <module name="com.joy (1)" />
-        <module name="com.joy (3) (springboot-mybatis)" />
         <module name="com.joy (2)" />
+        <module name="com.joy (3) (springboot-mybatis)" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

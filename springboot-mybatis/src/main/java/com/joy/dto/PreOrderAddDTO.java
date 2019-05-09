@@ -1,37 +1,36 @@
 package com.joy.dto;
 
 import com.joy.vo.BillInfoVO;
-import com.joy.vo.OrderInfoVO;
 import io.swagger.annotations.ApiModelProperty;
-
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class PreOrderAddDTO {
+import static com.joy.example.PreOrderExample.*;
 
-    @ApiModelProperty(value = "业主代码", required = true)
-    @NotBlank(message = "业主代码不能为空")
+public class PreOrderAddDTO implements Serializable {
+
+    @ApiModelProperty(notes = N_USERCODE, example = E_USERCODE)
+    @NotNull
     private String userCode;
 
-    @ApiModelProperty(value = "房间代码", required = true)
-    @NotBlank(message = "房间代码不能为空")
+    @ApiModelProperty(notes = N_ROOMCODE, example = E_ROOMCODE)
+    @NotNull
     private String roomCode;
 
-    @ApiModelProperty(value = "开始日期", required = true)
-    @NotBlank(message = "开始日期不能为空")
+    @ApiModelProperty(notes = N_BEGINDATE, example = E_BEGINDATE)
+    @NotNull
     private Date beginDate;
 
-    @ApiModelProperty(value = "截止日期", required = true)
-    @NotBlank(message = "截止日期不能为空")
+    @ApiModelProperty(notes = N_ENDDATE, example = E_ENDDATE)
+    @NotNull
     private Date endDate;
 
-    @ApiModelProperty(value = "应缴总金额", required = true)
-    @NotBlank(message = "应缴总金额不能为空")
+    @ApiModelProperty(notes = N_TOTALMONEY, example = E_TOTALMONEY)
+    @NotNull
     private Double totalMoney;
 
-    @ApiModelProperty(value = "账单详情", required = true)
-    @NotBlank(message = "账单详情不能为空")
     private List<BillInfoVO> billDetailList;
 
     public String getUserCode() {
