@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import static com.joy.example.BillInfoExample.*;
 
 @ApiModel(description = "账单详情展示对象")
-public class BillInfoAddDTO {
+public class BillInfoAddDTO extends AbstractDTO{
 
     @ApiModelProperty(notes = N_PKCHARGEITEM, example = E_PKCHARGEITEM)
     @NotNull(message = "收费项目主键不能为空")
