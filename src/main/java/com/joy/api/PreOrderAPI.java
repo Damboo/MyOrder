@@ -28,6 +28,6 @@ public interface PreOrderAPI {
             @ApiImplicitParam(name = "orderStatus", dataType = "Integer", value = "状态筛选", paramType = "query"),
             @ApiImplicitParam(name = "orderTime", dataType = "Integer", value = "时间筛选", paramType = "query"),
     })
-    Result<List<OrderInfoVO>> preOrderList(String userCode, Integer orderStatus, Integer orderTime);
+    Result preOrderList(String userCode, Integer orderStatus, Integer orderTime);
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.joy.api.PreOrderAPI;
+import com.joy.constant.OrderConstant;
 import com.joy.core.Result;
 import com.joy.core.SafeKit;
 import com.joy.dto.PreOrderAddDTO;
@@ -23,6 +24,7 @@ public class OrderController implements PreOrderAPI {
 
     @Autowired
     private PreOrderService preOrderService;
+    private Result result;
 
     @Override
     @PostMapping(value = "createPreOrder")
@@ -33,22 +35,31 @@ public class OrderController implements PreOrderAPI {
                 String errorMsg = SafeKit.getString(resultMap.get("errorMsg"));
                 return Result.fail(errorMsg);
             } else {
-                Result result = Result.success();
                 result.setData(resultMap.get("billNo"));
                 return result;
             }
         }
-        return Result.fail();
+        return Result.fail("创建预缴订单失败");
     }
 
     @Override
     @GetMapping(value = "preOrderList")
-    public Result<List<OrderInfoVO>> preOrderList(String userCode, Integer orderStatus, Integer orderTime) {
+    public Result preOrderList(String userCode, Integer orderStatus, Integer orderTime) {
         if (SafeKit.isEmpty(userCode)) {
-            throw new ServiceException("业主代码不能为空");
+            return Result.fail("业主代码不能为空");
+        }
+        if (null != orderStatus) {
+            if (!orderStatus.equals(OrderConstant.TOBEPAID_CODE) || !orderStatus.equals(OrderConstant.PAID_CODE) || !orderStatus.equals(OrderConstant.CANCEL_CODE)) {
+                return Result.fail("请输入正确的订单状态");
+            }
+        }
+        if (null != orderTime) {
+            if (!orderTime.equals(OrderConstant.THREEMONTH_CODE) || !orderTime.equals(OrderConstant.SIXMONTH_CODE) || !orderTime.equals(OrderConstant.ONEYEAR_CODE)) {
+                return Result.fail("查询最近月份仅限3月,6月,1年,请检查时间参数是否正确");
+            }
         }
         List<OrderInfoVO> orderInfoVOList = preOrderService.getPreOrderList(userCode, orderStatus, orderTime);
-        Result<List<OrderInfoVO>> result = Result.success();
+        result = Result.success();
         result.setData(orderInfoVOList);
         return result;
     }

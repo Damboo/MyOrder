@@ -16,4 +16,13 @@ public class OrderConstant {
 
     public static final Integer ORDERPAID_CODE = 1;
     public static final String ORDERPAID_NAME = "账单缴费";
+
+    public static final Integer THREEMONTH_CODE = 3;
+    public static final String THREEMONTH_NAME = "最近三个月";
+
+    public static final Integer SIXMONTH_CODE = 6;
+    public static final String SIXMONTH_NAME = "最近六个月";
+
+    public static final Integer ONEYEAR_CODE = 12;
+    public static final String ONEYEAR_NAME = "最近一年";
 }
