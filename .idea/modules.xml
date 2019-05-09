@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/com.joy.iml" filepath="$PROJECT_DIR$/com.joy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HisenseOrderFramework.iml" filepath="$PROJECT_DIR$/HisenseOrderFramework.iml" />
     </modules>
   </component>
 </project>

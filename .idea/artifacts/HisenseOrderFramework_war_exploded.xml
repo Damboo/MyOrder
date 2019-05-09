@@ -1,17 +1,17 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="com.joy:war exploded">
-    <output-path>$PROJECT_DIR$/target/com.joy-0.0.1-SNAPSHOT</output-path>
+  <artifact type="exploded-war" name="HisenseOrderFramework:war exploded">
+    <output-path>$PROJECT_DIR$/target/HisenseOrderFramework-0.0.1-SNAPSHOT</output-path>
     <properties id="maven-jee-properties">
       <options>
         <exploded>true</exploded>
-        <module>com.joy</module>
+        <module>HisenseOrderFramework</module>
         <packaging>war</packaging>
       </options>
     </properties>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="com.joy" />
+          <element id="module-output" name="HisenseOrderFramework" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-web:2.0.0.RELEASE" />
@@ -87,9 +87,9 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/com.joy-0.0.1-SNAPSHOT/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/target/HisenseOrderFramework-0.0.1-SNAPSHOT/META-INF/MANIFEST.MF" />
       </element>
-      <element id="javaee-facet-resources" facet="com.joy/web/Web" />
+      <element id="javaee-facet-resources" facet="HisenseOrderFramework/web/Web" />
     </root>
   </artifact>
 </component>
