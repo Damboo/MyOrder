@@ -99,9 +99,9 @@ public class PreOrderService {
         }
         //获取指定时间前的日期
         if (null == orderStatus) {
-            return null != orderTime ? preOrderDao.getPreOrderList(userCode, preDate) : preOrderDao.getPreOrderList(userCode);
+            return null != orderTime ? preOrderDao.getPreOrderList3(userCode, preDate) : preOrderDao.getPreOrderList4(userCode);
         } else {
-            return null != orderTime ? preOrderDao.getPreOrderList(userCode, orderStatus, preDate) : preOrderDao.getPreOrderList(userCode, orderStatus);
+            return null != orderTime ? preOrderDao.getPreOrderList1(userCode, orderStatus, preDate) : preOrderDao.getPreOrderList2(userCode, orderStatus);
         }
     }
 }

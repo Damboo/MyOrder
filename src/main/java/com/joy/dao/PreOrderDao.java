@@ -20,15 +20,15 @@ public interface PreOrderDao {
     List<PreOrder> getUserOrder(String userCode, String roomCode);
 
     @Select("SELECT * FROM property_pre_payment WHERE delFlag=0 and userCode = #{userCode} and statusCode = #{statusCode} and billDate > #{orderTime}")
-    List<OrderInfoVO> getPreOrderList(String userCode, Integer statusCode, String orderTime);
+    List<OrderInfoVO> getPreOrderList1(String userCode, Integer statusCode, String orderTime);
 
     @Select("SELECT * FROM property_pre_payment WHERE delFlag=0 and userCode = #{userCode} and statusCode = #{statusCode}")
-    List<OrderInfoVO> getPreOrderList(String userCode, Integer statusCode);
+    List<OrderInfoVO> getPreOrderList2(String userCode, Integer statusCode);
 
     @Select("SELECT * FROM property_pre_payment WHERE delFlag=0 and userCode = #{userCode} and billDate > #{orderTime}")
-    List<OrderInfoVO> getPreOrderList(String userCode, String orderTime);
+    List<OrderInfoVO> getPreOrderList3(String userCode, String orderTime);
 
     @Select("SELECT * FROM property_pre_payment WHERE delFlag=0 and userCode = #{userCode}")
-    List<OrderInfoVO> getPreOrderList(String userCode);
+    List<OrderInfoVO> getPreOrderList4(String userCode);
 
 }
