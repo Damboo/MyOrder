@@ -1,4 +1,4 @@
-package com.joy.core;
+package com.joy.constant;
 
 public class MySqlTypeConst {
     public static final String INT = "int";

@@ -1,7 +1,7 @@
 package com.joy.pojo;
 
 import com.joy.core.Column;
-import com.joy.core.MySqlTypeConst;
+import com.joy.constant.MySqlTypeConst;
 import com.joy.core.TableInfo;
 import com.joy.core.Transient;
 
