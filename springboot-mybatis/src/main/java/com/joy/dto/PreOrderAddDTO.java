@@ -1,5 +1,6 @@
 package com.joy.dto;
 
+import com.joy.constant.JsonFieldConst;
 import com.joy.vo.BillInfoVO;
 import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.NotNull;
@@ -21,10 +22,12 @@ public class PreOrderAddDTO implements Serializable {
 
     @ApiModelProperty(notes = N_BEGINDATE, example = E_BEGINDATE)
     @NotNull
+    @JSONField(format = JsonFieldConst.DEFAULT_DATETIME_FORMAT)
     private Date beginDate;
 
     @ApiModelProperty(notes = N_ENDDATE, example = E_ENDDATE)
     @NotNull
+    @JSONField(format = JsonFieldConst.DEFAULT_DATETIME_FORMAT)
     private Date endDate;
 
     @ApiModelProperty(notes = N_TOTALMONEY, example = E_TOTALMONEY)

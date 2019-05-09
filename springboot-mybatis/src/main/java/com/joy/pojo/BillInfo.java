@@ -25,19 +25,19 @@ public class BillInfo {
     @Column(notNull = true, length = 11, comment = N_FEETYPE)
     private Integer feeType;
 
-    @Column(type = MySqlTypeConst.DECIMAL, length = 11, comment = N_NPRICE)
+    @Column(type = MySqlTypeConst.DECIMAL, length = 10, comment = N_NPRICE)
     private Double nprice;
 
-    @Column(type = MySqlTypeConst.DECIMAL, length = 11, comment = N_ADVANCEMONEY)
+    @Column(type = MySqlTypeConst.DECIMAL, length = 10, comment = N_ADVANCEMONEY)
     private Double advanceMoney;
 
-    @Column(type = MySqlTypeConst.DECIMAL, length = 11, comment = N_DISCOUNTMONEY)
+    @Column(type = MySqlTypeConst.DECIMAL, length = 10, comment = N_DISCOUNTMONEY)
     private Double discountMoney;
 
-    @Column(type = MySqlTypeConst.DECIMAL, length = 11, comment = N_DISCOUNT)
+    @Column(type = MySqlTypeConst.DECIMAL, length = 3, comment = N_DISCOUNT)
     private Double discount;
 
-    @Column(notNull = true, type = MySqlTypeConst.DECIMAL, length = 11, comment = N_CHARGEMONEY)
+    @Column(notNull = true, type = MySqlTypeConst.DECIMAL, length = 10, comment = N_CHARGEMONEY)
     private Double chargeMoney;
 
     @Column(length = 255, comment = N_NCPKSTD)

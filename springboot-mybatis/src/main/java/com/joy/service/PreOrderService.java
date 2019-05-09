@@ -72,13 +72,10 @@ public class PreOrderService {
         preOrder.setBillNo(billNo);
         preOrder.setBillDate(date);
         //默认预缴费
-        preOrder.setBillType(OrderConstant.PREPAID);
+        preOrder.setBillType(OrderConstant.PREPAID_CODE);
         //默认待支付
         preOrder.setStatusCode(OrderConstant.TOBEPAID_CODE);
-        preOrder.setStatusName(OrderConstant.TOBEPAID_NAME);
-        preOrder.setUnionPayMoney(preOrderAddDTO.getTotalMoney());
         preOrder.setCreatedTime(date);
-        preOrder.setServerTime(date);
         preOrder.setDelFlag(0);
         preOrderDao.save(preOrder);
         //保存账单信息

@@ -7,13 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="com.joy" />
-        <module name="com.joy (1)" />
-        <module name="com.joy (2)" />
-        <module name="com.joy (3) (springboot-mybatis)" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="com.joy (1)" target="1.8" />
+      <module name="com.joy (2)" target="1.5" />
       <module name="com.joy (3)" target="1.5" />
+      <module name="com.joy (3) (springboot-mybatis)" target="1.5" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

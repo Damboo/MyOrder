@@ -26,13 +26,17 @@ public class OrderController implements PreOrderAPI {
     @PostMapping(value = "createPreOrder")
     public Result createPreOrder(@Valid @RequestBody PreOrderAddDTO preOrderAddDTO) {
         Map<String, Object> resultMap = preOrderService.createPreOrder(preOrderAddDTO);
-        if (!SafeKit.getBoolean(resultMap.get("isSuccess"))) {
-            String errorMsg = SafeKit.getString(resultMap.get("errorMsg"));
-            return Result.fail(errorMsg);
+        if (resultMap != null && !resultMap.isEmpty()) {
+            if (!SafeKit.getBoolean(resultMap.get("isSuccess"))) {
+                String errorMsg = SafeKit.getString(resultMap.get("errorMsg"));
+                return Result.fail(errorMsg);
+            } else {
+                Result result = Result.success();
+                result.setData(resultMap.get("billNo"));
+                return result;
+            }
         }
-        Result result = Result.success();
-        result.setData(resultMap.get("billNo"));
-        return result;
+        return Result.fail();
     }
 
     @Override

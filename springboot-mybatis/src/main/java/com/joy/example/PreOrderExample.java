@@ -27,7 +27,7 @@ public class PreOrderExample {
     public static final String E_BILLDATE = "2019-04-24 12:00:00";
 
     public static final String N_BILLTYPE = "订单类型";
-    public static final String E_BILLTYPE = "预缴费";
+    public static final String E_BILLTYPE = "0";
 
     public static final String N_STATUSCODE = "订单状态编号";
     public static final String E_STATUSCODE = "2";

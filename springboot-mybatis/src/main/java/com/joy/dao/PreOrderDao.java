@@ -12,8 +12,8 @@ import java.util.List;
 public interface PreOrderDao {
 
     @Insert(" insert into property_pre_payment " +
-            "  (billNo,billDate,billType,statusCode,statusName,unionPayMoney,createdTime,serverTime,userCode,roomCode,beginDate,endDate,totalMoney,delFlag)" +
-            " values (#{billNo},#{billDate},#{billType},#{statusCode},#{statusName},#{unionPayMoney},#{createdTime},#{serverTime},#{userCode},#{roomCode},#{beginDate},#{endDate},#{totalMoney},#{delFlag})")
+            "  (billNo,billDate,billType,statusCode,createdTime,userCode,roomCode,beginDate,endDate,totalMoney,delFlag)" +
+            " values (#{billNo},#{billDate},#{billType},#{statusCode},#{createdTime},#{userCode},#{roomCode},#{beginDate},#{endDate},#{totalMoney},#{delFlag})")
     void save(PreOrder preOrder);
 
     @Select("SELECT * FROM property_pre_payment WHERE delFlag=0 and statusCode=0 and (userCode = #{userCode} or roomCode = #{roomCode})")

@@ -11,6 +11,9 @@ public class OrderConstant {
     public static final Integer CANCEL_CODE = 2;
     public static final String CANCEL_NAME = "已取消";
 
-    public static final String ORDER_PAID = "账单缴费";
-    public static final String PREPAID = "预缴费";
+    public static final Integer PREPAID_CODE = 0;
+    public static final String PREPAID_NAME = "预缴费";
+
+    public static final Integer ORDERPAID_CODE = 1;
+    public static final String ORDERPAID_NAME = "账单缴费";
 }

@@ -31,23 +31,14 @@ public class PreOrder {
     @Column(notNull = true, comment = N_BILLDATE)
     private Date billDate;
 
-    @Column(notNull = true, length = 255, comment = N_BILLTYPE)
-    private String billType;
+    @Column(notNull = true, length = 11, comment = N_BILLTYPE)
+    private Integer billType;
 
     @Column(notNull = true, length = 2, comment = N_STATUSCODE)
     private Integer statusCode;
 
-    @Column(notNull = true, length = 255, comment = N_STATUSNAME)
-    private String statusName;
-
-    @Column(type = MySqlTypeConst.DECIMAL, length = 11, comment = N_UNIONPAYMONEY)
-    private Double unionPayMoney;
-
     @Column(notNull = true, comment = N_CREATEDTIME)
     private Date createdTime;
-
-    @Column(notNull = true, comment = N_SERVERTIME)
-    private Date serverTime;
 
     @Column(notNull = true, length = 200, comment = N_USERCODE)
     private String userCode;
@@ -62,7 +53,7 @@ public class PreOrder {
     private Date endDate;
 
     @Column(notNull = true, type = MySqlTypeConst.DECIMAL, length = 11, comment = N_TOTALMONEY)
-    private Double totalMoney;
+        private Double totalMoney;
 
     @Column(type = MySqlTypeConst.SMALLINT, length = 1, notNull = true, defaultValue = "0", comment = N_DEL_FLAG)
     private Integer delFlag;
@@ -107,11 +98,11 @@ public class PreOrder {
         this.billDate = billDate;
     }
 
-    public String getBillType() {
+    public Integer getBillType() {
         return billType;
     }
 
-    public void setBillType(String billType) {
+    public void setBillType(Integer billType) {
         this.billType = billType;
     }
 
@@ -123,36 +114,12 @@ public class PreOrder {
         this.statusCode = statusCode;
     }
 
-    public String getStatusName() {
-        return statusName;
-    }
-
-    public void setStatusName(String statusName) {
-        this.statusName = statusName;
-    }
-
-    public Double getUnionPayMoney() {
-        return unionPayMoney;
-    }
-
-    public void setUnionPayMoney(Double unionPayMoney) {
-        this.unionPayMoney = unionPayMoney;
-    }
-
     public Date getCreatedTime() {
         return createdTime;
     }
 
     public void setCreatedTime(Date createdTime) {
         this.createdTime = createdTime;
-    }
-
-    public Date getServerTime() {
-        return serverTime;
-    }
-
-    public void setServerTime(Date serverTime) {
-        this.serverTime = serverTime;
     }
 
     public String getUserCode() {
