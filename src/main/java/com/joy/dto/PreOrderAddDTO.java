@@ -2,7 +2,6 @@ package com.joy.dto;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.joy.constant.JsonFieldConst;
-import com.joy.core.AbstractDTO;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.Valid;

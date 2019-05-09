@@ -1,4 +1,4 @@
-package com.joy.core;
+package com.joy.dto;
 
 import com.alibaba.fastjson.JSON;
 
