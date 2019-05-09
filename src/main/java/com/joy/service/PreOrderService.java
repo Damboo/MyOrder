@@ -46,7 +46,7 @@ public class PreOrderService {
         List<BillInfoVO> list = preOrderAddDTO.getBillDetailList();
         //对当前list进行遍历,校验金额是否一致
         Double orderMoney = preOrderAddDTO.getTotalMoney();
-        Double detailTotalMoney = null;
+        Double detailTotalMoney = 0.0;
         for (BillInfoVO billInfoVO : list) {
             if (null != billInfoVO) {
                 detailTotalMoney += billInfoVO.getChargeMoney();

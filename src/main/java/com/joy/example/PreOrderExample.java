@@ -36,7 +36,7 @@ public class PreOrderExample {
     public static final String E_STATUSNAME = "已支付";
 
     public static final String N_UNIONPAYMONEY = "订单金额";
-    public static final String E_UNIONPAYMONEY = "700";
+    public static final String E_UNIONPAYMONEY = "700.00";
 
     public static final String N_CREATEDTIME = "创建时间";
     public static final String E_CREATEDTIME = "2018-12-11 11:00:00";
@@ -57,7 +57,7 @@ public class PreOrderExample {
     public static final String E_ENDDATE = "2019-06-30";
 
     public static final String N_TOTALMONEY = "应缴总金额";
-    public static final String E_TOTALMONEY = "3060";
+    public static final String E_TOTALMONEY = "3060.00";
 
     public static final String N_DEL_FLAG = "已删除";
     public static final String E_DEL_FLAG = "0";

@@ -20,7 +20,7 @@ import org.springframework.stereotype.Repository;
 public interface BillInfoDao {
     @Insert(" insert into property_pre_payment_option " +
             "  (pkChargeItem,chargeItem,feeType,nprice,advanceMoney,discountMoney,discount,chargeMoney,ncPkStd,ncPkDiscount,discountName)" +
-            " values (#{pkChargeItem},#{chargeItem},#{feeType},#{nprice},#{advanceMoney},#{discountMoney},#{discount},#{chargeMoney},#{ncPkStd},#{ncPkDiscount},#{discountName}")
+            " values (#{pkChargeItem},#{chargeItem},#{feeType},#{nprice},#{advanceMoney},#{discountMoney},#{discount},#{chargeMoney},#{ncPkStd},#{ncPkDiscount},#{discountName})")
     void save(BillInfo billInfo);
 
 }
