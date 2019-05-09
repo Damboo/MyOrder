@@ -1,5 +1,6 @@
 package com.joy.dto;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.joy.constant.JsonFieldConst;
 import com.joy.vo.BillInfoVO;
 import io.swagger.annotations.ApiModelProperty;

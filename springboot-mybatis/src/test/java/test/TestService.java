@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-public class ServiceTest extends TmallApplicationTests {
+public class TestService extends TmallApplicationTests {
 
     @Autowired
     private PreOrderService preOrderService;
