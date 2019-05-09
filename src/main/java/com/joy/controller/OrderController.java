@@ -10,6 +10,7 @@ import com.joy.dto.PreOrderAddDTO;
 import com.joy.exception.ServiceException;
 import com.joy.service.PreOrderService;
 import com.joy.vo.OrderInfoVO;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/propertyfee")
+@Api(value = "测试接口Controller")
 public class OrderController implements PreOrderAPI {
 
     @Autowired
