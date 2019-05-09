@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="war" name="com.joy:war">
+  <artifact type="war" name="HisenseOrderFramework:war">
     <output-path>$PROJECT_DIR$/target</output-path>
     <properties id="maven-jee-properties">
       <options>
@@ -8,7 +8,7 @@
       </options>
     </properties>
     <root id="archive" name="com.joy-0.0.1-SNAPSHOT.war">
-      <element id="artifact" artifact-name="com.joy:war exploded" />
+      <element id="artifact" artifact-name="HisenseOrderFramework:war exploded" />
     </root>
   </artifact>
 </component>
