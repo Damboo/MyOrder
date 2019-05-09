@@ -1,11 +1,5 @@
 package com.joy.example;
 
-import com.joy.vo.BillInfoVO;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * 订单的明细
  */

@@ -2,22 +2,18 @@ package com.joy.service;
 
 import com.joy.constant.OrderConstant;
 import com.joy.core.BeanMapper;
-import com.joy.core.SafeKit;
 import com.joy.dao.BillInfoDao;
 import com.joy.dao.PreOrderDao;
 import com.joy.dto.PreOrderAddDTO;
 import com.joy.pojo.BillInfo;
 import com.joy.pojo.PreOrder;
 import com.joy.util.DateUtil;
-import com.joy.vo.BillInfoVO;
+import com.joy.dto.BillInfoAddDTO;
 import com.joy.vo.OrderInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class PreOrderService {
@@ -35,7 +31,7 @@ public class PreOrderService {
      */
     public Map<String, Object> createPreOrder(PreOrderAddDTO preOrderAddDTO) {
         Map<String, Object> map = new HashMap<>();
-        //    首先校验出是否存在未支付的订单,如果存在则不生成(status未支付,delFlag为0)
+        //首先校验出是否存在未支付的订单,如果存在则不生成(status未支付,delFlag为0)
         List<PreOrder> orderList = preOrderDao.getUserOrder(preOrderAddDTO.getUserCode(), preOrderAddDTO.getRoomCode());
         if (!orderList.isEmpty()) {
             map.put("isSuccess", false);
@@ -43,15 +39,22 @@ public class PreOrderService {
             return map;
         }
         //取出dto内的账单详情
-        List<BillInfoVO> list = preOrderAddDTO.getBillDetailList();
+        List<BillInfoAddDTO> list = preOrderAddDTO.getBillDetailList();
         //对当前list进行遍历,校验金额是否一致
         Double orderMoney = preOrderAddDTO.getTotalMoney();
         Double detailTotalMoney = 0.0;
-        for (BillInfoVO billInfoVO : list) {
-            if (null != billInfoVO) {
-                detailTotalMoney += billInfoVO.getChargeMoney();
+        if (!list.isEmpty()) {
+            for (BillInfoAddDTO billInfoAddDTO : list) {
+                if (null != billInfoAddDTO) {
+                    detailTotalMoney += billInfoAddDTO.getChargeMoney();
+                }
             }
+        } else {
+            map.put("isSuccess", false);
+            map.put("errorMsg", "订单下的账单为空");
+            return map;
         }
+
         if (!orderMoney.equals(detailTotalMoney)) {
             map.put("isSuccess", false);
             map.put("errorMsg", "订单金额和账单总金额不匹配");
@@ -79,9 +82,9 @@ public class PreOrderService {
         preOrder.setDelFlag(0);
         preOrderDao.save(preOrder);
         //保存账单信息
-        for (BillInfoVO billInfoVO : list) {
+        for (BillInfoAddDTO billInfoAddDTO : list) {
             //自动装配然后循环保存
-            BillInfo billInfo = BeanMapper.map(billInfoVO, BillInfo.class);
+            BillInfo billInfo = BeanMapper.map(billInfoAddDTO, BillInfo.class);
             billInfoDao.save(billInfo);
         }
         map.put("isSuccess", true);

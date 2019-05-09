@@ -1,20 +1,25 @@
-package com.joy.vo;
+package com.joy.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.constraints.NotNull;
+
 import static com.joy.example.BillInfoExample.*;
 
 @ApiModel(description = "账单详情展示对象")
-public class BillInfoVO {
+public class BillInfoAddDTO {
 
     @ApiModelProperty(notes = N_PKCHARGEITEM, example = E_PKCHARGEITEM)
+    @NotNull(message = "收费项目主键不能为空")
     private String pkChargeItem;
 
     @ApiModelProperty(notes = N_CHARGEITEM, example = E_CHARGEITEM)
+    @NotNull(message = "收费项目不能为空")
     private String chargeItem;
 
     @ApiModelProperty(notes = N_FEETYPE, example = E_FEETYPE)
+    @NotNull(message = "收费标准类型不能为空")
     private Integer feeType;
 
     @ApiModelProperty(notes = N_NPRICE, example = E_NPRICE)
@@ -30,6 +35,7 @@ public class BillInfoVO {
     private Double discount;
 
     @ApiModelProperty(notes = N_CHARGEMONEY, example = E_CHARGEMONEY)
+    @NotNull(message = "优惠后金额不能为空")
     private Double chargeMoney;
 
     @ApiModelProperty(notes = N_NCPKSTD, example = E_NCPKSTD)

@@ -3,9 +3,9 @@ package com.joy.dto;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.joy.constant.JsonFieldConst;
 import com.joy.core.AbstractDTO;
-import com.joy.vo.BillInfoVO;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
@@ -36,7 +36,8 @@ public class PreOrderAddDTO extends AbstractDTO {
     @NotNull(message = "应缴总金额不能为空")
     private Double totalMoney;
 
-    private List<BillInfoVO> billDetailList;
+    @Valid
+    private List<BillInfoAddDTO> billDetailList;
 
     public String getUserCode() {
         return userCode;
@@ -78,11 +79,11 @@ public class PreOrderAddDTO extends AbstractDTO {
         this.totalMoney = totalMoney;
     }
 
-    public List<BillInfoVO> getBillDetailList() {
+    public List<BillInfoAddDTO> getBillDetailList() {
         return billDetailList;
     }
 
-    public void setBillDetailList(List<BillInfoVO> billDetailList) {
+    public void setBillDetailList(List<BillInfoAddDTO> billDetailList) {
         this.billDetailList = billDetailList;
     }
 }
