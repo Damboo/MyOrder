@@ -8,11 +8,11 @@ import com.joy.constant.OrderConstant;
 import com.joy.core.Result;
 import com.joy.core.SafeKit;
 import com.joy.dto.PreOrderAddDTO;
-import com.joy.exception.ServiceException;
 import com.joy.service.PreOrderService;
 import com.joy.vo.OrderInfoVO;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -28,7 +28,11 @@ public class OrderController implements PreOrderAPI {
 
     @Override
     @PostMapping(value = "createPreOrder")
-    public Result createPreOrder(@Valid @RequestBody PreOrderAddDTO preOrderAddDTO) {
+    public Result createPreOrder(@Valid @RequestBody PreOrderAddDTO preOrderAddDTO, BindingResult bindingResult) {
+        //若有为空的参数
+        if (bindingResult.hasErrors()) {
+            return Result.fail(bindingResult.getFieldError().getDefaultMessage());
+        }
         Map<String, Object> resultMap = preOrderService.createPreOrder(preOrderAddDTO);
         if (resultMap != null && !resultMap.isEmpty()) {
             if (!SafeKit.getBoolean(resultMap.get("isSuccess"))) {
@@ -49,7 +53,7 @@ public class OrderController implements PreOrderAPI {
             return Result.fail("业主代码不能为空");
         }
         if (null != orderStatus) {
-            if (!orderStatus.equals(OrderConstant.TOBEPAID_CODE) || !orderStatus.equals(OrderConstant.PAID_CODE) || !orderStatus.equals(OrderConstant.CANCEL_CODE)) {
+            if (!orderStatus.equals(OrderConstant.TOBEPAID_CODE) && !orderStatus.equals(OrderConstant.PAID_CODE) && !orderStatus.equals(OrderConstant.CANCEL_CODE)) {
                 return Result.fail("请输入正确的订单状态");
             }
         }

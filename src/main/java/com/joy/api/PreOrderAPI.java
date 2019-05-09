@@ -2,13 +2,12 @@ package com.joy.api;
 
 import com.joy.core.Result;
 import com.joy.dto.PreOrderAddDTO;
-import com.joy.vo.OrderInfoVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.validation.BindingResult;
 
-import java.util.List;
 
 @Api(tags = "PreOrderManage", description = "预缴订单相关服务")
 public interface PreOrderAPI {
@@ -18,7 +17,7 @@ public interface PreOrderAPI {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "preOrderAddDTO", dataType = "PreOrderAddDTO", value = "预缴订单添加DTO", paramType = "body"),
     })
-    Result createPreOrder(PreOrderAddDTO preOrderAddDTO);
+    Result createPreOrder(PreOrderAddDTO preOrderAddDTO, BindingResult bindingResult);
 
 
     /******************************查询预缴费订单列表接口*****************************/
